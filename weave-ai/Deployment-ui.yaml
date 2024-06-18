@@ -36,12 +36,3 @@ spec:
             - containerPort: 8501
               name: http
               protocol: TCP
-
-              Infrastructure Automation
-Declarative Procedural Code
-Immutable Infrastructure
-Client-only Architecture
-
-Open WebUI
-On a mission to build the best open-source AI user interface.
-Full-stack Deployment

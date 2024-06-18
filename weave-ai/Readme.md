@@ -23,7 +23,7 @@ Minimum requirements of the Kubernetes cluster are 8 CPUs and 16GB of memory wit
 
 Set up a Kubernetes in Docker (KIND) cluster with terraform/opentofu command:
 
-```shell {"id":"01J0M5ZJT3BAN4W49PEMSSYGY9"}
+```shell
 cd tf-bootstrap
 terraform init
 terraform plan
@@ -40,7 +40,7 @@ At this stage, you're ready to install Weave AI and its controller(s):
 - add weave-ai in your flux infrastructure repo
 - commit and push changes
 
-```shell {"id":"01J0M5ZJT3BAN4W49PEN4XMZZD"}
+```shell
 git clone https://github.com/$TF_VAR_github_org/fw-non-prod
 cd fw-non-prod
 cp -r ../weave-ai clusters/my-cluster
@@ -55,13 +55,13 @@ After installation, you can check flux log messages, indicating that the Weave A
 
 To view the available models in your cluster, use:
 
-```shell {"id":"01J0M5ZJT3BAN4W49PER5GV6GN"}
+```shell
 kubectl get ocirepositories.source.toolkit.fluxcd.io -A
 ```
 
 This command lists all OCI models, which are initially in an `INACTIVE` state to conserve resources.
 
-```shell {"id":"01J0M5ZJT3BAN4W49PES60HEAD"}
+```shell
 NAME                               VERSION           FAMILY  STATUS    CREATED
 weave-ai/zephyr-7b-beta            v1.0.0-q5km-gguf          INACTIVE  1 minute ago
 ```
@@ -70,14 +70,14 @@ weave-ai/zephyr-7b-beta            v1.0.0-q5km-gguf          INACTIVE  1 minute 
 
 To activate and run a model, add LanguageModel and UI manifests to kustomisation.yaml. Commit and push your changes:
 
-```shell {"id":"01J0M5ZJT3BAN4W49PESKHAXKB"}
+```shell
 - LanguageModel.yaml
 - Deployment-ui.yaml
 ```
 
 This command activates the model and sets up a UI for interaction.
 
-```shell {"id":"01J0M5ZJT3BAN4W49PEWJVQP45"}
+```shell
 kubectl get languagemodels.ai.contrib.fluxcd.io
 kubectl get po
 ```
@@ -86,19 +86,19 @@ Follow the instructions for port forwarding to access the LLM and the UI.
 
 To connect to your LLM:
 
-```shell {"id":"01J0M5ZJT3BAN4W49PEZDJ039A"}
+```shell
 kubectl port-forward -n default svc/my-model 8000:8000
 ```
 
 To connect to the UI:
 
-```shell {"id":"01J0M5ZJT3BAN4W49PF2THA3H0"}
+```shell
 kubectl port-forward -n default deploy/my-model-chat-app 8501:8501
 ```
 
 Simply run the UI port-forward command.
 
-```shell {"id":"01J0M5ZJT3BAN4W49PF6J3MV5B"}
+```shell
 kubectl port-forward -n default deploy/my-model-chat-app 8501:8501
 ```
 
@@ -114,6 +114,6 @@ This deletes the specified language model instance from your cluster, also with 
 
 To cleanup the cluster use:
 
-```shell {"id":"01J0M5ZJT3BAN4W49PF7H2T21G"}
+```shell
 terraform destroy
 ```

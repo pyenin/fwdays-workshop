@@ -1,6 +1,6 @@
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-"$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Install Terraform, Flux, and htop using Homebrew
 yes|brew install hashicorp/tap/terraform opentofu fluxcd/tap/flux htop

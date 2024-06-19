@@ -1,0 +1,28 @@
+name: ci
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  kubeconform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: login to github packages
+        run: echo "${{ github.token }}" | docker login https://ghcr.io -u ${GITHUB_ACTOR} --password-stdin
+      - name: git checkout
+        uses: actions/checkout@v4
+      - name: run kubeconform
+        uses: docker://ghcr.io/yannh/kubeconform:latest
+        with:
+          entrypoint: '/kubeconform'
+          args: >
+            -schema-location default 
+            -schema-location https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json 
+            -schema-location weave-ai/crd_languagemodel_v1alpha1.json
+            -ignore-filename-pattern .github/workflows/*
+            -ignore-filename-pattern json
+            -skip CustomResourceDefinition
+            -summary
+            -output pretty
+            .

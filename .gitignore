@@ -22,3 +22,5 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+tf-bootstrap/.terraform.lock.hcl
+tf-bootstrap/flux-e2e-config

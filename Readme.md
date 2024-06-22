@@ -35,6 +35,15 @@ This will deploy the controller to your Kubernetes cluster.
 
 Please ensure that these are installed and properly configured on your machine before using the scripts and controllers in this repository.
 
+# Infacost
+Install Infracost following the https://www.infracost.io/docs/#quick-start
+Register on https://www.infracost.io/
+
+Add your API key to the environment:
+infracost configure set api_key <KEY>
+
+Add a repository secret called INFRACOST_API_KEY with your API key. https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-encrypted-secrets-for-a-repository
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.

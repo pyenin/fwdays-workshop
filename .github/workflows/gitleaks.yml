@@ -12,4 +12,4 @@ jobs:
     - name: Run Gitleaks
       uses: zricethezav/gitleaks-action@v1.2.0
       with:
-        config_path: gitleaks.toml
+        args: "--config-path=gitleaks.toml --verbose --redact"

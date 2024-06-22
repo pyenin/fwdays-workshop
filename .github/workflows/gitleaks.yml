@@ -1,15 +1,16 @@
-name: Gitleaks Scan
-
-on: [push, pull_request]
-
+name: gitleaks
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
 jobs:
-  gitleaks:
+  scan:
+    name: gitleaks
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Run Gitleaks
-      uses: zricethezav/gitleaks-action@v1.2.0
-      with:
-        args: "--config-path=gitleaks.toml --verbose --redact"
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
